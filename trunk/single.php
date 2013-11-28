@@ -24,10 +24,24 @@
 		<?php printLikes(get_the_ID()); ?>
 		<div class="share"><span>分享</span>
 			<ul class="sns">
+				<?php 
+				if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) {
+    				$secure_connection = true;
+				}else{
+					$secure_connection = false;
+				}
+				if($secure_connection){ ?>
+				<li><a id="share-sina" href="javascript:window.open('http://v.t.sina.com.cn/share/share.php?title='+encodeURIComponent(document.title.substring(0,76))+'&url='+encodeURIComponent(location.href)+'&rcontent=','_blank','scrollbars=no,width=600,height=450,left=75,top=20,status=no,resizable=yes'); void 0" title="分享到新浪微博"><img src="https://suley.net/static/images/icon-sns-sina.gif" alt="分享到新浪微博"></a></li>
+				<li><a id="share-tencent" href="javascript:void(0);" onclick="window.open('http://v.t.qq.com/share/share.php?title='+encodeURIComponent(document.title.substring(0,76))+'&url='+encodeURIComponent(location.href)+'&rcontent=','_blank','scrollbars=no,width=600,height=450,left=75,top=20,status=no,resizable=yes'); " title="分享到腾讯微博"><img src="https://suley.net/static/images/icon-sns-qq.gif" alt="分享到腾讯微博"></a></li>
+				<li><a id="share-douban" href="javascript:void(function(){var d=document,e=encodeURIComponent,s1=window.getSelection,s2=d.getSelection,s3=d.selection,s=s1?s1():s2?s2():s3?s3.createRange().text:'',r='http://www.douban.com/recommend/?url='+e(d.location.href)+'&title='+e(d.title)+'&sel='+e(s)+'&v=1',x=function(){if(!window.open(r,'douban','toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330'))location.href=r+'&r=1'};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})()" title="分享到豆瓣"><img src="https://suley.net/static/images/icon-sns-douban.gif" alt="分享到豆瓣"></a></li>
+				<li><a id="share-twitter" href="http://twitter.com/home?status=Currently reading <?php the_title(); ?>(<?php the_permalink(); ?>)" title="分享到推特"><img src="https://suley.net/static/images/icon-sns-twitter.gif" alt="分享到推特"></a></li>
+				
+			    <?php }else{ ?>
 				<li><a id="share-sina" href="javascript:window.open('http://v.t.sina.com.cn/share/share.php?title='+encodeURIComponent(document.title.substring(0,76))+'&url='+encodeURIComponent(location.href)+'&rcontent=','_blank','scrollbars=no,width=600,height=450,left=75,top=20,status=no,resizable=yes'); void 0" title="分享到新浪微博"><img src="http://static.suley.net/blog/images/icon-sns-sina.gif" alt="分享到新浪微博"></a></li>
 				<li><a id="share-tencent" href="javascript:void(0);" onclick="window.open('http://v.t.qq.com/share/share.php?title='+encodeURIComponent(document.title.substring(0,76))+'&url='+encodeURIComponent(location.href)+'&rcontent=','_blank','scrollbars=no,width=600,height=450,left=75,top=20,status=no,resizable=yes'); " title="分享到腾讯微博"><img src="http://static.suley.net/blog/images/icon-sns-qq.gif" alt="分享到腾讯微博"></a></li>
 				<li><a id="share-douban" href="javascript:void(function(){var d=document,e=encodeURIComponent,s1=window.getSelection,s2=d.getSelection,s3=d.selection,s=s1?s1():s2?s2():s3?s3.createRange().text:'',r='http://www.douban.com/recommend/?url='+e(d.location.href)+'&title='+e(d.title)+'&sel='+e(s)+'&v=1',x=function(){if(!window.open(r,'douban','toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330'))location.href=r+'&r=1'};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})()" title="分享到豆瓣"><img src="http://static.suley.net/blog/images/icon-sns-douban.gif" alt="分享到豆瓣"></a></li>
 				<li><a id="share-twitter" href="http://twitter.com/home?status=Currently reading <?php the_title(); ?>(<?php the_permalink(); ?>)" title="分享到推特"><img src="http://static.suley.net/blog/images/icon-sns-twitter.gif" alt="分享到推特"></a></li>
+				<?php } ?>
 			</ul>
 		</div>
 	</div>

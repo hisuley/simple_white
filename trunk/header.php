@@ -1,3 +1,12 @@
+<?php
+// Find out whether it's https or not
+if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'
+    || $_SERVER['SERVER_PORT'] == 443) {
+    $secure_connection = true;
+}else{
+	$secure_connection = false;
+}
+?>
 <!DOCTYPE html>
 <html lang=en>
 <head profile="http://gmpg.org/xfn/11">
@@ -70,16 +79,27 @@ if(!is_single() && !is_page()){ ?>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="format-detection" content="telephone=no">
+<?php if(!$secure_connection){ ?>
 <link rel="stylesheet" href="http://static.suley.net/blog/style_mnmlist.css" type="text/css" media="screen, print" />
-<link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> RSS Feed" href="<?php bloginfo('rss2_url'); ?>" />
-<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 <script src="http://static.suley.net/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="https://suley.net/static/js/likesScript.js"></script>
 <script type="text/javascript">
 /* <![CDATA[ */
 var like_this_ajax_object = {"ajax_url":"http:\/\/suley.net\/wp-admin\/admin-ajax.php"};
 /* ]]> */
 </script>
-<script type="text/javascript" src="http://static.suley.net/blog/js/likesScript.js"></script>
+<?php }else{ ?>
+<link rel="stylesheet" href="https://suley.net/static/style_mnmlist.css" type="text/css" media="screen, print" />
+<script src="https://suley.net/static/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="https://suley.net/static/js/likesScript.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var like_this_ajax_object = {"ajax_url":"https:\/\/suley.net\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<?php } ?>
+<link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> RSS Feed" href="<?php bloginfo('rss2_url'); ?>" />
+<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 <link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://suley.net/xmlrpc.php?rsd">
 <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://suley.net/wp-includes/wlwmanifest.xml">
 </head>
